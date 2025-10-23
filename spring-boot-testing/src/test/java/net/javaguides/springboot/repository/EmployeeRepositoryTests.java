@@ -150,5 +150,97 @@ public class EmployeeRepositoryTests{
         assertThat(employeeRepository.findById(savedEmployee.getId())).isEmpty();
         
     }
+
+
+    @Test
+    public void givenFirstAndLastName_whenFindByJPQL_thenEmployee(){
+        
+        // given - precondition or setup
+        Employee employee = Employee.builder()
+                .firstName("rahul")
+                .lastName("gupta")
+                .email("rahul.gupta@gmail.com").build();
+
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test 
+        Employee fetechEmployee=employeeRepository.findByJPQL(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        );
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull();
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+
+    }
+
+    @Test
+    public void givenFirstAndLastName_whenFindByJPQLNamedParams_thenEmployee(){
+        
+        // given - precondition or setup
+        Employee employee = Employee.builder()
+                .firstName("rahul")
+                .lastName("gupta")
+                .email("rahul.gupta@gmail.com").build();
     
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test     
+        Employee fetechEmployee=employeeRepository.findByJPQLNamedParams(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        );
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull(); 
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+    }
+
+
+    @DisplayName("JUnit test for find employee by native SQL index params")
+    @Test
+    public void givenFirstAndLastName_whenFindByNativeSQLUsingIndexParams_thenEmployee(){
+        
+        // given - precondition or setup
+        Employee employee = Employee.builder()
+                .firstName("rahul")
+                .lastName("gupta")
+                .email("rahul.gupta@gmail.com").build();
+    
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test     
+        
+        Employee fetechEmployee=employeeRepository.findByNativeSQLUsingIndexParams(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        ).get();    
+
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull();
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+    
+    
+    }
+
+    @DisplayName("JUnit test for find employee by native SQL named params")
+    @Test
+    public void givenFirstAndLastName_whenFindByNativeSQLNamedParams_thenEmployee(){
+        
+        // given - precondition or setup
+        Employee employee = Employee.builder()
+                .firstName("rahul")
+                .lastName("gupta")
+                .email("rahul.gupta@gmail.com").build();
+        
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test     
+        Employee fetechEmployee=employeeRepository.findByNativeSQLNamedParams(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        ).get();    
+        
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull();
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+
+
+    }
+
 }
