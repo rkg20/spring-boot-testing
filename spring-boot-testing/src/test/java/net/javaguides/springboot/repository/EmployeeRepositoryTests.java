@@ -187,6 +187,28 @@ public class EmployeeRepositoryTests{
 
     }
 
+
+    @Test
+    public void givenFirstAndLastName_whenFindByJPQL_thenEmployee(){
+        
+        // given - precondition or setup
+        // Employee employee = Employee.builder()
+        //         .firstName("rahul")
+        //         .lastName("gupta")
+        //         .email("rahul.gupta@gmail.com").build();
+
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test 
+        Employee fetechEmployee=employeeRepository.findByJPQL(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        );
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull();
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+
+    }
+
     @Test
     public void givenFirstAndLastName_whenFindByJPQLNamedParams_thenEmployee(){
         
@@ -244,7 +266,6 @@ public class EmployeeRepositoryTests{
         //         .email("rahul.gupta@gmail.com").build();
         
         Employee savedEmployee=employeeRepository.save(employee);
-
         // when - action or the behaviour that we are going to test     
         Employee fetechEmployee=employeeRepository.findByNativeSQLNamedParams(
             savedEmployee.getFirstName(), 
@@ -257,7 +278,5 @@ public class EmployeeRepositoryTests{
 
 
     }
-
-    
 
 }
