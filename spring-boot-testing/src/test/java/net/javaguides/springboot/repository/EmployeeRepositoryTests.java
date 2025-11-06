@@ -3,6 +3,8 @@ package net.javaguides.springboot.repository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.AbstractAssert;
@@ -161,7 +163,28 @@ public class EmployeeRepositoryTests{
         // then - verify the output
         assertThat(employeeRepository.findById(savedEmployee.getId())).isEmpty();
         
+    }
+
+
+    @Test
+    public void givenFirstAndLastName_whenFindByJPQL_thenEmployee(){
         
+        // given - precondition or setup
+        // Employee employee = Employee.builder()
+        //         .firstName("rahul")
+        //         .lastName("gupta")
+        //         .email("rahul.gupta@gmail.com").build();
+
+        Employee savedEmployee=employeeRepository.save(employee);
+        // when - action or the behaviour that we are going to test 
+        Employee fetechEmployee=employeeRepository.findByJPQL(
+            savedEmployee.getFirstName(), 
+            savedEmployee.getLastName()
+        );
+        // then - verify the output
+        assertThat(fetechEmployee).isNotNull();
+        assertThat(fetechEmployee.getId()).isEqualTo(savedEmployee.getId());
+
     }
 
 
