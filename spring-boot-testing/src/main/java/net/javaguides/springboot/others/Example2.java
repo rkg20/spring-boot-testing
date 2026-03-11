@@ -2,7 +2,6 @@ package net.javaguides.springboot.others;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
 public class Example2 {
@@ -14,6 +13,7 @@ public class Example2 {
 
         System.out.println(list);
 
+        
 
     }
 

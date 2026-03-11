@@ -1,21 +1,28 @@
-package net.javaguides.springboot;
+package net.javaguides.springboot.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+@NoArgsConstructor
+@ToString
+public class EmployeeDto{
 
     private Long id;
-    private String name;
+
+    private String firstName;
+
+    private String lastName;
+
     private String email;
-  
-    
+
+
+
 
 
 }

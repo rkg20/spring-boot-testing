@@ -1,14 +1,26 @@
 package net.javaguides.springboot.exception;
 
+import org.springframework.http.HttpStatus;
 
 public class ResourceNotFoundException extends RuntimeException{
 
-    public ResourceNotFoundException(String message){
-        super(message);
+    String message;
+    HttpStatus status;
+
+    public ResourceNotFoundException(String message, HttpStatus status) {
+        this.message=message;
+        this.status=status;
     }
 
-    public ResourceNotFoundException(String message, Throwable cause){
-        super(message,cause);
+
+    
+    @Override
+    public String getMessage(){
+        return message;
+        
     }
+    
+
+
     
 }

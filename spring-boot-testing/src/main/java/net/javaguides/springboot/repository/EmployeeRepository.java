@@ -11,6 +11,7 @@ import net.javaguides.springboot.model.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
  
     Optional<Employee> findByEmail(String email);
+    // Optional<Employee> findByEmailName(String ExactEmail);
 
     @Query("SELECT e FROM Employee e WHERE e.firstName = ?1 AND e.lastName = ?2")
     Employee findByJPQL(String firstName, String lastName); 
@@ -29,6 +30,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         nativeQuery = true
     )
     Optional<Employee> findByNativeSQLNamedParams(@Param("firstName") String firstName, @Param("lastName") String lastName);
+
 
     
 

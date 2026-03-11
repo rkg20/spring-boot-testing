@@ -3,15 +3,15 @@ package net.javaguides.springboot.service;
 import java.util.List;
 import java.util.Optional;
 
-import net.javaguides.springboot.model.Employee;
+import net.javaguides.springboot.dto.EmployeeDto;
 
 public interface EmployeeService {
     
-    Employee saveEmployee(Employee employee);
-    List<Employee> getAllEmployees();
-    Optional<Employee> getEmployeeById(long employeeId);
-    Employee updatEmployee(Employee employee);
+    EmployeeDto saveEmployee(EmployeeDto employeeDto);
+    List<EmployeeDto> getAllEmployees(Integer pageNumber);
+    EmployeeDto getEmployeeById(long employeeId);
+    EmployeeDto updatEmployee(Long employeeId,EmployeeDto employeeDto);
     void deleteEmployeeById(long employeeId);
-
+    List<EmployeeDto> getEmployeeByEmail(String email);
 
 }
